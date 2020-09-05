@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MAERSK Task</title>
+    <style>
+      .numbers_container {
+        width: 960px;
+        margin: 0 auto;
+        background: #efefef;
+      }
+      .header {
+        box-shadow-bottom: 0px #000;
+        border: 1px solid #fff;
+        margin: 0;
+        padding: 0em;
+        border-bottom: 0;
+        background: #fff;
+      }
+      .line {
+        background: #333;
+        height: 7px;
+        opacity: 0.44;
+        margin-bottom: -7px;
+      }
+      h1 {
+        text-align: center;
+        font-weight: 100;
+        color: #333;
+      }
+      .button_section {
+        float: right;
+      }
+      #numberview {
+        padding: 0 4px;
+      }
+      .number__card {
+        display: inline-block;
+        line-height: 30px;
+        width: 50px;
+        text-align: center;
+        color: #fff;
+        border-radius: 4px;
+        margin: 3px;
+        padding: 0.4em 0.9em;
+        margin: 0px -3px;
+        font-size: 6em;
+      }
+      .number__card:nth-child(3),
+      .number__card:nth-child(5),
+      .number__card:nth-child(9){
+         background: #2f454e;
+      }
+      .number__card:nth-child(2),
+      .number__card:nth-child(4){
+         background: #2b8ead;
+      }
+      .number__card:nth-child(1),
+      .number__card:nth-child(8){
+         background: #6f98a8;
+      }
+      .number__card:nth-child(6),
+      .number__card:nth-child(7){
+         background: #bfbfbf;
+      }
+      /*==========  Button  ==========*/
+
+      .btn {
+          overflow: visible;
+          display: block;
+          width: 240px;
+          position: relative;
+          top: 0px;
+          font-family: inherit;
+          text-decoration: none;
+          font-size: 16px;
+          text-transform: uppercase;
+          background: #f7f7f7;
+          padding: 15px 50px;
+          margin: 25px 22px 0 10px;
+          border: 1px solid #c4c4c4;
+          border-radius: 5px;
+          box-shadow: 0px 5px 0px #c4c4c4;
+          color: #222;
+          text-shadow: 1px 1px 1px #fff;
+          transition: All 250ms ease;
+          padding: 0.8em 2em;
+          background: #72c3dc;
+          color: #fff;
+          border: 1px solid #2b8ead;
+          border-radius: 5px;
+          box-shadow: 0px 5px 0px #2b8ead;
+          text-shadow: 1px 1px 1px #2b8ead;
+          font-weight: 100;
+      }
+      /*==========  Button Active State  ==========*/
+
+      .btn:active {
+          position: relative;
+          top: 5px;
+          box-shadow: none !important;
+          transition: All 250ms ease;
+      }
+      /*==========  Media Quries  ==========*/
+      @media screen and (min-width: 360px) and (max-width: 1000px) {
+        .numbers_container {
+          background: none;
+          width: 100%;
+        }
+        .line {
+          display: none;
+        }
+        .button_section {
+          float: none;
+          margin: 1em;
+          width: auto;
+          border: 0;
+          text-align: center;
+        }
+        .header {
+          background: #333;
+          color: #fff;
+        }
+        h1 {
+          color: #fff;
+          height: 60px;
+        }
+        .btn {
+          overflow: visible;
+          padding: 15px 25px;
+          display: inline-block;
+          margin: 10px;
+          width: 135px;
+        }
+        .number__card {
+          list-style: none;
+          padding: 0.3em;
+          display: block;
+          margin: 0;
+          color: #333;
+          font-size: 3em;
+          text-align: center;
+          width: 95%;
+        }
+        .number__card:nth-child(1),
+        .number__card:nth-child(2),
+        .number__card:nth-child(3),
+        .number__card:nth-child(4),
+        .number__card:nth-child(5),
+        .number__card:nth-child(6),
+        .number__card:nth-child(7),
+        .number__card:nth-child(8),
+        .number__card:nth-child(9) {
+          background: #efefef;
+          margin-bottom: 10px;
+        }
+        .number__card:nth-child(3),
+        .number__card:nth-child(5),
+        .number__card:nth-child(9) {
+          border-left: 0.3em solid #2f454e;
+        }
+        .number__card:nth-child(2),
+        .number__card:nth-child(4) {
+          border-left: 0.3em solid #2b8ead;
+        }
+        .number__card:nth-child(1),
+        .number__card:nth-child(8) {
+          border-left: 0.3em solid #6f98a8;
+        }
+        .number__card:nth-child(6),
+        .number__card:nth-child(7) {
+          border-left: 0.3em solid #bfbfbf;
+        }
+      }
+      footer {
+        font-size: 0.8em;
+        text-align: center;
+        color: #333;
+        padding: 5px;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="numbers_container">
+    <div class="header">
+      <h1>Shuffel and Sort</h1>
+  		<div class="line"></div>
+    </div>
+
+    <div class="button_section">
+      <button class="btn action_button__shuffle" id="shuffle">Shuffle</button>
+      <button class="btn action_button__sort">Sort</button>
+    </div>
+
+    <div id="numberview"></div>
+
+    <footer>
+  		<p>Shuffel and Sort by {{ Narendra K }}
+  		  </p>
+  	</footer>
+  </div>
+
+  </body>
+  <script>
+  	var numberlist = $('#numberview');
+
+    var numbers = [];
+
+    for (var i = 1; i <= 9; i++) {
+      numberlist.append('<div class="number__card">' + i + '</div>');
+      numbers.push(i);
+    }
+
+    $(".action_button__shuffle").click(function() {
+      var ArrayLength = numbers.length - 1;
+      var toSwap;
+      var temp;
+
+      for (var i = ArrayLength; i > 0; i--) {
+        toSwap = Math.floor(Math.random() * (i + 1));
+        temp = numbers[i];
+        numbers[i] = numbers[toSwap];
+        numbers[toSwap] = temp;
+      }
+
+      i = 0;
+
+      $('.number__card').each(function() {
+        this.innerHTML = numbers[i];
+        i++;
+      });
+    });
+
+    $(".action_button__sort").click(function() {
+      numbers.sort();
+      i = 0;
+      $('.number__card').each(function() {
+        this.innerHTML = numbers[i];
+        i++;
+      });
+    });
+  </script>
+</html>
